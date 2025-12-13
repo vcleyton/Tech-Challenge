@@ -28,14 +28,18 @@ class BooksSpider(scrapy.Spider):
 
     def parse_book(self, response):
         title = response.css('div.product_main h1::text').get()
-        price = response.css('p.price_color::text').get()
+
+        unformatted_price = response.css('p.price_color::text').get()  
+        price = float(re.sub(r'[^0-9.]', '', unformatted_price))
 
         stock_texts = response.css('p.instock.availability::text').getall()
         stock_joined = " ".join(s.strip() for s in stock_texts if s.strip())
         m = re.search(r'(\d+)', stock_joined or "")
         stock = int(m.group(1)) if m else 0
         
-        rating = response.css('p.star-rating').attrib['class'].split()[-1]
+        string_rating = response.css('p.star-rating').attrib['class'].split()[-1]
+        rating = {'One': 1, 'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5}.get(string_rating, 0)
+
         category = response.xpath('//*[@id="default"]/div/div/ul/li[3]/a/text()').get()
         image_url = response.urljoin(response.css('div.item.active img::attr(src)').get())
 
