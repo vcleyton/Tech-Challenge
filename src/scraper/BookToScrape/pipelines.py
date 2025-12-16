@@ -12,7 +12,10 @@ import os
 class BooktoscrapePipeline:
     def open_spider(self, spider):
         # DB file created in current working dir (where you run `scrapy crawl`)
-        db_path = os.path.join(os.getcwd(), "books.db")
+        db_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'databases'))
+        os.makedirs(db_dir, exist_ok=True)
+        db_path = os.path.join(db_dir, "books.db")
+
         self.conn = sqlite3.connect(db_path)
         self.cur = self.conn.cursor()
         self.cur.execute(
@@ -20,9 +23,9 @@ class BooktoscrapePipeline:
             CREATE TABLE IF NOT EXISTS books (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT,
-                price TEXT,
+                price REAL,
                 stock INTEGER,
-                rating TEXT,
+                rating INTEGER,
                 category TEXT,
                 image_url TEXT
             )
