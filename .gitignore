@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Poetry
+.venv/
+.cache/
+
+# VS Code
+.vscode/
+
+# Banco local
+*.db
