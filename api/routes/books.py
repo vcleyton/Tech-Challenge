@@ -154,3 +154,51 @@ def books_by_price_range():
     conn.close()
 
     return jsonify([dict(book) for book in books])
+
+@books_bp.route("/search", methods=["GET"])
+def search_books():
+    category = request.args.get("category")
+    min_price = request.args.get("min_price", type=float)
+    max_price = request.args.get("max_price", type=float)
+    rating = request.args.get("rating", type=int)
+
+    query = "SELECT * FROM books WHERE 1=1"
+    params = []
+
+    if category:
+        query += " AND category = ?"
+        params.append(category)
+
+    if min_price is not None:
+        query += " AND price >= ?"
+        params.append(min_price)
+
+    if max_price is not None:
+        query += " AND price <= ?"
+        params.append(max_price)
+
+    if rating is not None:
+        query += " AND rating >= ?"
+        params.append(rating)
+
+    conn = get_db_connection()
+    books = conn.execute(query, params).fetchall()
+    conn.close()
+
+    return jsonify([dict(book) for book in books])
+
+@books_bp.route("/stats", methods=["GET"])
+def books_stats():
+    conn = get_db_connection()
+    stats = conn.execute("""
+        SELECT
+            COUNT(*) AS total_books,
+            ROUND(AVG(price), 2) AS avg_price,
+            MIN(price) AS min_price,
+            MAX(price) AS max_price,
+            ROUND(AVG(rating), 2) AS avg_rating
+        FROM books
+    """).fetchone()
+    conn.close()
+
+    return jsonify(dict(stats))
