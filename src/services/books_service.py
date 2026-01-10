@@ -17,7 +17,7 @@ class Book(Base):
 
 class BooksService:
     def __init__(self):
-        db_path = os.path.join(os.path.dirname(__file__), '..', 'databases', 'books.db')
+        db_path = os.path.join(os.path.dirname(__file__), '..', '..', 'instance', 'books.db')
         db_url = f"sqlite:///{db_path}"
         self.engine = create_engine(db_url, connect_args={"check_same_thread": False})
         self.Session = sessionmaker(bind=self.engine)
@@ -25,8 +25,19 @@ class BooksService:
     def get_books(self):
         session = self.Session()
         try:
-            booksTitles = session.query(Book.title).all()
-            return [title[0] for title in booksTitles]
+            books = session.query(Book).all()
+            return [
+                {
+                    "id": book.id,
+                    "title": book.title,
+                    "price": book.price,
+                    "stock": book.stock,
+                    "rating": book.rating,
+                    "category": book.category,
+                    "image_url": book.image_url
+                }
+                for book in books
+            ]
         finally:
             session.close()
 

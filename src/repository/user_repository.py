@@ -5,13 +5,10 @@ class UserRepository:
 
     @staticmethod
     def get_user_by_username(username):
-        """Retorna um usuário pelo nome de usuário."""
-        # .get() é otimizado para busca por Primary Key
-        return User.query.get(username)
+        return User.query.filter_by(username=username).first()
 
     @staticmethod
     def add_user(username, password):
-        """Cria e salva um novo usuário no banco."""
         new_user = User(username=username, password=password)
         db.session.add(new_user)
         db.session.commit()

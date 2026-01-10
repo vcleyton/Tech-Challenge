@@ -12,7 +12,7 @@ import os
 class BooktoscrapePipeline:
     def open_spider(self, spider):
         # DB file created in current working dir (where you run `scrapy crawl`)
-        db_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', 'databases'))
+        db_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), '..', '..', '..', 'instance'))
         os.makedirs(db_dir, exist_ok=True)
         db_path = os.path.join(db_dir, "books.db")
 
