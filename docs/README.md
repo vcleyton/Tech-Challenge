@@ -206,3 +206,28 @@ As rotas estão todas documentadas via Swagger UI.
 Rotas sensíveis estão protegidas por JWT (/api/v1/scraping/trigger).
 
 O projeto está preparado para consumo de Machine Learning e integração com dashboards.
+
+O scraping foi simulado por decisão de escopo do desafio, mantendo o foco na arquitetura de ingestão e exposição de dados. A estrutura permite fácil substituição por scraping real ou integração com pipelines externos.
+
+## Machine Learning
+
+Os endpoints de ML foram projetados como contrato de dados para cientistas de dados e pipelines automatizados:
+
+/api/v1/ml/features — Features prontas para análise
+
+/api/v1/ml/training-data — Dataset completo para treinamento
+
+/api/v1/ml/predictions — Integração com modelos treinados
+
+Esses endpoints permitem integração direta com notebooks, pipelines de treinamento e experimentação de modelos.
+
+
+## Considerações Finais
+
+Este projeto foi desenvolvido com foco em Engenharia de Machine Learning, indo além de uma simples API REST. Toda a arquitetura foi pensada para permitir ingestão, persistência, exposição e consumo de dados de forma estruturada e escalável.
+
+A separação clara entre scraping, banco de dados, camada de API e endpoints voltados para Machine Learning possibilita que cientistas de dados utilizem os dados diretamente em pipelines de análise, treinamento e validação de modelos.
+
+A adoção de Swagger garante documentação clara e reutilizável, enquanto o uso de autenticação JWT protege rotas sensíveis, alinhando o projeto com boas práticas de produção.
+
+Apesar de utilizar SQLite por simplicidade, a arquitetura foi planejada para permitir fácil migração para bancos relacionais mais robustos, bem como integração futura com modelos de Machine Learning em produção.

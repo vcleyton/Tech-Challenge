@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_restx import Api
 from flask_jwt_extended import JWTManager
 import time
+import os
 
 from api.logger import logger
 
@@ -35,7 +36,16 @@ def create_app():
         version="1.0",
         description="API pública para consulta de livros (Tech Challenge)",
         doc="/api/v1/",
-        strict_slashes=False 
+        strict_slashes=False,
+        authorizations={
+            "Bearer Auth": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "Authorization",
+                "description": "Digite: Bearer <seu_token_jwt>"
+            }
+        },
+        security="Bearer Auth" 
     )
 
     # ==========================
@@ -67,5 +77,8 @@ def create_app():
 
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     app = create_app()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=port)
+    #app = create_app()
+    #app.run(debug=True)

@@ -13,7 +13,7 @@ class TriggerScraping(Resource):
     @jwt_required()
     @api.doc(
         description="Inicia o scraping de livros (rota protegida, somente admin)",
-        security="Bearer"
+        security="Bearer Auth"
     )
     def post(self):
         # Aqui você pode chamar a função real de scraping

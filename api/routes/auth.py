@@ -53,7 +53,10 @@ class Login(Resource):
 @api.route("/refresh")
 class Refresh(Resource):
     @jwt_required(refresh=True)
-    @api.doc(description="Renovar token de acesso usando refresh token")
+    @api.doc(
+        description="Renovar token de acesso usando refresh token",
+        security="Bearer Auth"
+    )
     def post(self):
         identity = get_jwt_identity()
         new_access_token = create_access_token(identity=identity)
