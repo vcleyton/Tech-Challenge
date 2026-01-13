@@ -40,7 +40,7 @@ class BooksSpider(scrapy.Spider):
         string_rating = response.css('p.star-rating').attrib['class'].split()[-1]
         rating = {'One': 1, 'Two': 2, 'Three': 3, 'Four': 4, 'Five': 5}.get(string_rating, 0)
 
-        category = response.xpath('//*[@id="default"]/div/div/ul/li[3]/a/text()').get()
+        category = response.xpath('//*[@id="default"]/div/div/ul/li[3]/a/text()').get().lower()
         image_url = response.urljoin(response.css('div.item.active img::attr(src)').get())
 
         yield {

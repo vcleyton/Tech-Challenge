@@ -18,9 +18,4 @@ class Config:
     JWT_HEADER_TYPE = 'Bearer'
     
     # Configuração do tempo de expiração do token JWT
-    try:
-        _expires_seconds = int(os.getenv('JWT_ACCESS_TOKEN_EXPIRES_SECONDS', 1800))
-    except ValueError:
-        _expires_seconds = 1800
-    
-    JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=_expires_seconds)
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=1800)  # 30 minutos

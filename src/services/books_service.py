@@ -1,145 +1,121 @@
-import os
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy import Float, cast, Integer, func
+from src.repository.books_repository import BooksRepository
+from src.utils.validators import Validator
+from src.utils.exceptions import NotFoundError, ValidationError
 
-Base = declarative_base()
-
-class Book(Base):
-    __tablename__ = "books"
-    id = Column(Integer, primary_key=True)
-    title = Column(String)
-    price = Column(String)
-    stock = Column(Integer)
-    rating = Column(String)
-    category = Column(String)
-    image_url = Column(String)
 
 class BooksService:
     def __init__(self):
-        db_path = os.path.join(os.path.dirname(__file__), '..', '..', 'instance', 'books.db')
-        db_url = f"sqlite:///{db_path}"
-        self.engine = create_engine(db_url, connect_args={"check_same_thread": False})
-        self.Session = sessionmaker(bind=self.engine)
+        self.repository = BooksRepository()
 
-    def get_books(self):
-        session = self.Session()
-        try:
-            books = session.query(Book).all()
-            return [
-                {
-                    "id": book.id,
-                    "title": book.title,
-                    "price": book.price,
-                    "stock": book.stock,
-                    "rating": book.rating,
-                    "category": book.category,
-                    "image_url": book.image_url
-                }
-                for book in books
-            ]
-        finally:
-            session.close()
+    def get_all_books(self):
+        """
+        Retorna todos os livros disponíveis.
+        
+        Returns:
+            list: Lista de dicionários com informações dos livros
+        """
+        books = self.repository.get_books()
+        if not books:
+            return []
+        return books
 
     def get_book_by_id(self, book_id):
-        session = self.Session()
+        """
+        Retorna um livro específico pelo ID.
+        
+        Args:
+            book_id (int): ID do livro
+            
+        Returns:
+            dict: Dicionário com informações do livro
+            
+        Raises:
+            ValidationError: Se o book_id for inválido
+            NotFoundError: Se o livro não for encontrado
+        """
         try:
-            book = session.query(Book).filter(Book.id == book_id).first()
-
-            if book:
-                return {
-                    "id": book.id,
-                    "title": book.title,
-                    "price": book.price,
-                    "stock": book.stock,
-                    "rating": book.rating,
-                    "category": book.category,
-                    "image_url": book.image_url
-                }
-            else:
-                return None
-        finally:
-            session.close()
+            Validator.validate_book_id(book_id)
+        except ValidationError as e:
+            raise ValidationError(str(e))
+        
+        book = self.repository.get_book_by_id(book_id)
+        
+        if not book:
+            raise NotFoundError(f"Livro com ID {book_id} não encontrado")
+        
+        return book
 
     def search_books(self, title=None, min_price=None, max_price=None, rating=None, min_rating=None, max_rating=None, category=None):
-        session = self.Session()
+        """
+        Busca livros com filtros opcionais.
+        
+        Args:
+            title (str, optional): Título ou parte do título do livro
+            min_price (float, optional): Preço mínimo
+            max_price (float, optional): Preço máximo
+            rating (str, optional): Avaliação específica
+            min_rating (int, optional): Avaliação mínima
+            max_rating (int, optional): Avaliação máxima
+            category (str, optional): Categoria do livro
+            
+        Returns:
+            list: Lista de livros que correspondem aos critérios de busca
+            
+        Raises:
+            ValidationError: Se algum dos parâmetros for inválido
+        """
+        # Valida parâmetros numéricos
         try:
-            query = session.query(Book)
-
-            if title:
-                query = query.filter(Book.title.ilike(f"%{title}%"))
             if min_price is not None:
-                query = query.filter(cast(Book.price, Float) >= min_price)
+                Validator.validate_price(min_price)
             if max_price is not None:
-                query = query.filter(cast(Book.price, Float) <= max_price)
-            if rating:
-                query = query.filter(Book.rating == rating)
+                Validator.validate_price(max_price)
             if min_rating is not None:
-                query = query.filter(cast(Book.rating, Integer) >= min_rating)
+                if not isinstance(min_rating, int) or min_rating < 0 or min_rating > 5:
+                    raise ValidationError("min_rating deve estar entre 0 e 5")
             if max_rating is not None:
-                query = query.filter(cast(Book.rating, Integer) <= max_rating)
-            if category:
-                query = query.filter(Book.category.ilike(f"%{category}%"))
-
-            results = query.all()
-
-            return [
-                {
-                    "id": book.id,
-                    "title": book.title,
-                    "price": book.price,
-                    "stock": book.stock,
-                    "rating": book.rating,
-                    "category": book.category,
-                    "image_url": book.image_url
-                }
-                for book in results
-            ]
-        finally:
-            session.close()
+                if not isinstance(max_rating, int) or max_rating < 0 or max_rating > 5:
+                    raise ValidationError("max_rating deve estar entre 0 e 5")
+        except ValidationError as e:
+            raise e
+        
+        # Valida consistência de preços
+        if min_price is not None and max_price is not None:
+            if float(min_price) > float(max_price):
+                raise ValidationError("min_price não pode ser maior que max_price")
+        
+        # Valida consistência de ratings
+        if min_rating is not None and max_rating is not None:
+            if min_rating > max_rating:
+                raise ValidationError("min_rating não pode ser maior que max_rating")
+        
+        books = self.repository.search_books(title, min_price, max_price, rating, min_rating, max_rating, category)
+        return books if books else []
 
     def get_categories(self):
-        session = self.Session()
-        try:
-            categories = session.query(Book.category).distinct().all()
-            return [category[0] for category in categories]
-        finally:
-            session.close()
+        """
+        Retorna todas as categorias de livros disponíveis.
+        
+        Returns:
+            list: Lista de categorias únicas
+        """
+        categories = self.repository.get_categories()
+        return categories if categories else []
 
     def get_stats_overview(self):
-        session = self.Session()
-        try:
-            total_books = session.query(Book).count()
-            avg_price = session.query(func.avg(cast(Book.price, Float))).scalar()
-            raw_distribution = session.query(Book.rating, func.count(Book.id)).group_by(Book.rating).all()
-            distribution_rating = [{"rating": rating, "count": count} for rating, count in raw_distribution]
-
-            return {
-                "total_books": total_books,
-                "average_price": round(avg_price, 2),
-                "distribution_rating": distribution_rating
-            }
-        finally:
-            session.close()
+        """
+        Retorna estatísticas gerais dos livros.
+        
+        Returns:
+            dict: Dicionário com total de livros, preço médio e distribuição de ratings
+        """
+        return self.repository.get_stats_overview()
 
     def get_stats_by_category(self):
-        session = self.Session()
-        try:
-            raw_stats = session.query(
-                Book.category,
-                func.count(Book.id),
-                func.avg(cast(Book.price, Float))
-            ).group_by(Book.category).all()
-
-            stats = [
-                {
-                    "category": category,
-                    "total_books": total_books,
-                    "average_price": round(average_price, 2)
-                }
-                for category, total_books, average_price in raw_stats
-            ]
-
-            return stats
-        finally:
-            session.close()
+        """
+        Retorna estatísticas agrupadas por categoria.
+        
+        Returns:
+            list: Lista de dicionários com estatísticas por categoria
+        """
+        return self.repository.get_stats_by_category()
