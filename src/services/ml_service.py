@@ -71,6 +71,9 @@ class MLService:
 
             file_path = os.path.join(self.instance_path, 'ml_model.joblib')
             joblib.dump(model, file_path)
+            
+            feature_order_file = os.path.join(self.instance_path, 'feature_order.joblib')
+            joblib.dump(list(X.columns), feature_order_file)
         except Exception as e:
             raise MLError(f"Erro ao treinar modelo: {str(e)}")
 
@@ -89,8 +92,11 @@ class MLService:
             MLError: Se houver erro na predição
         """
         try:
-            # Valida entrada
-            Validator.validate_prediction_input(predictions_json)
+            # Obtém categorias válidas do banco de dados
+            valid_categories = self.repository.get_categories()
+            
+            # Valida entrada com validação de categoria
+            Validator.validate_prediction_input(predictions_json, valid_categories)
             
             df_input = pd.DataFrame([predictions_json])
 
@@ -100,14 +106,14 @@ class MLService:
 
             encoder_file_path = os.path.join(self.instance_path, 'encoder.joblib')
             model_file_path = os.path.join(self.instance_path, 'ml_model.joblib')
+            feature_order_file = os.path.join(self.instance_path, 'feature_order.joblib')
 
-            if os.path.exists(encoder_file_path):
+            if os.path.exists(model_file_path) and os.path.exists(feature_order_file) and os.path.exists(encoder_file_path):
                 df_encoded = self.encode_input(df_input)
-            else:
-                self.encode_predict_data()
-                df_encoded = self.encode_input(df_input)
+                
+                feature_order = joblib.load(feature_order_file)
+                df_encoded = df_encoded[feature_order]
 
-            if os.path.exists(model_file_path):
                 model = joblib.load(model_file_path)
                 prediction = model.predict(df_encoded)
                 return {"predicted_price": round(float(prediction[0]), 2)}
@@ -158,27 +164,6 @@ class MLService:
         except Exception as e:
             raise MLError(f"Erro ao formatar dados: {str(e)}")
     
-    def encode_predict_data(self):
-        """
-        Codifica dados de predição para o encoder.
-        
-        Raises:
-            MLError: Se houver erro ao codificar
-        """
-        try:
-            books = self.repository.get_books()
-
-            if not books:
-                raise MLError("Nenhum livro disponível para codificação")
-
-            books_categories = [book["category"].lower().strip() for book in books]
-        
-            df_books = pd.DataFrame(books_categories, columns=['category'])
-
-            self.encode_input(df_books)
-        except Exception as e:
-            raise MLError(f"Erro ao codificar dados de predição: {str(e)}")
-        
     def encode_input(self, df_input):
         """
         Codifica features categóricas usando OneHotEncoder.

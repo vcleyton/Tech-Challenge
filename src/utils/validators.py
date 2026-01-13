@@ -131,12 +131,13 @@ class Validator:
             raise ValidationError("Stock deve ser um inteiro não negativo")
 
     @staticmethod
-    def validate_prediction_input(data):
+    def validate_prediction_input(data, valid_categories=None):
         """
         Valida os dados de entrada para predição de ML.
         
         Args:
             data (dict): Dados a validar
+            valid_categories (list, optional): Lista de categorias válidas do banco de dados
             
         Raises:
             ValidationError: Se os dados forem inválidos
@@ -155,5 +156,9 @@ class Validator:
         
         if not isinstance(data['category'], str) or len(data['category'].strip()) == 0:
             raise ValidationError("Category deve ser uma string não vazia")
+        
+        if valid_categories is not None:
+            if data['category'].lower().strip() not in valid_categories:
+                raise ValidationError(f"Categoria '{data['category']}' não existe. Categorias válidas: {', '.join(valid_categories)}")
         
         return True
