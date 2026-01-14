@@ -1,21 +1,6 @@
 # 📊 Pipeline de Dados – Arquitetura Profissional
 
 
-## 🎯 Objetivos do Projeto
-
-* Demonstrar uma arquitetura de dados moderna e bem estruturada
-* Garantir qualidade e padronização dos dados
-* Facilitar consumo analítico e integração via API
-* Servir como base para evolução em projetos de dados reais
-
----
-
-## 🏗️ Arquitetura do Pipeline
-
-O pipeline foi projetado de forma modular, com separação clara de responsabilidades entre as camadas, garantindo **manutenibilidade**, **escalabilidade** e **facilidade de evolução**.
-
----
-
 ### 🔹 1. Ingestão de Dados
 
 Camada responsável pela coleta automatizada dos dados diretamente da fonte.
