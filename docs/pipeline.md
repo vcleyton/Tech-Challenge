@@ -1,12 +1,5 @@
 # 📊 Pipeline de Dados – Arquitetura Profissional
 
-## Visão Geral
-
-Este projeto apresenta um **pipeline de dados end-to-end**, desenvolvido com foco em **qualidade, organização, escalabilidade e boas práticas de engenharia de dados**. Ele cobre todas as etapas do ciclo de vida dos dados — da coleta à disponibilização — servindo como base sólida para análises, integrações e aplicações inteligentes.
-
-O pipeline utiliza como fonte o site público **Books to Scrape**, sendo estruturado como um **projeto real**, facilmente adaptável para outros domínios e fontes de dados.
-
----
 
 ## 🎯 Objetivos do Projeto
 
@@ -136,6 +129,3 @@ Camada onde os dados geram valor direto para o negócio ou para análises técni
 
 ---
 
-## 🧾 Conclusão
-
-Este projeto demonstra, de forma prática e profissional, como estruturar um pipeline de dados moderno, confiável e preparado para crescer. Sua arquitetura permite fácil manutenção, evolução tecnológica e aplicação em cenários reais de dados, sendo uma base sólida para projetos analíticos e aplicações orientadas a dados.
