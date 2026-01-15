@@ -1,12 +1,23 @@
-import streamlit as st
+import os
 import requests
+import streamlit as st
 
-API_URL = "http://localhost:5000/api/v1/books/stats/overview"
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:5000")
 
-st.title("📊 Book API Analytics")
+st.title("📊 Books Tech Challenge - Dashboard")
 
-response = requests.get(API_URL).json()
+try:
+    response = requests.get(f"{API_BASE_URL}/api/v1/books/stats/overview", timeout=10)
+    response.raise_for_status()
+    data = response.json()
 
-st.metric("Total de Livros", response["total_books"])
-st.metric("Preço Médio", response["average_price"])
-st.metric("Rating Médio", response["average_rating"])
+    st.metric("Total de Livros", data["total_books"])
+    st.metric("Preço Médio", data["average_price"])
+    st.metric("Rating Médio", data["average_rating"])
+
+except Exception as e:
+    st.error("Erro ao conectar com a API")
+    st.exception(e)
+
+
+
