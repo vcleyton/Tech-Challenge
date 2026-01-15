@@ -1,12 +1,19 @@
 # 📚 Books Tech Challenge
 
+![Python](https://img.shields.io/badge/Python-3.12%2B-blue)
+![API](https://img.shields.io/badge/API-Online-success)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
+> 🔗 **API pública:** [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-challenge.onrender.com/api/v1/)
+
 API RESTful para ingestão, persistência e exposição de dados de livros, com foco em **engenharia de dados** e **Machine Learning**. O projeto demonstra boas práticas de arquitetura, documentação e segurança, estando preparado para evolução em ambientes de produção.
 
 ---
 
 ## ✨ Visão Geral
 
-O **Books Tech Challenge** é uma API desenvolvida em **Python** com **Flask** e **Flask-RESTX**, responsável por fornecer dados de uma coleção fictícia de livros. A solução contempla desde a ingestão (scraping simulado) até o consumo por aplicações, dashboards e pipelines de ML.
+O **Books Tech Challenge** é uma API desenvolvida em **Python** com **Flask** e **Flask-RESTX**, responsável por fornecer dados de uma coleção fictícia de livros. A solução cobre todo o ciclo de dados — da ingestão (scraping simulado) ao consumo por aplicações, dashboards e pipelines de Machine Learning.
 
 ### Principais funcionalidades
 
@@ -20,9 +27,35 @@ O **Books Tech Challenge** é uma API desenvolvida em **Python** com **Flask** e
 
 ---
 
+## 🌐 Ambiente Público (API Online)
+
+O projeto conta com uma **instância pública em execução**, permitindo testes, demonstração técnica e consumo externo sem necessidade de setup local.
+
+* **Base URL da API:**
+  [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-challenge.onrender.com/api/v1/)
+
+* **Swagger UI (Documentação Interativa):**
+  [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-challenge.onrender.com/api/v1/)
+
+> ℹ️ Este ambiente utiliza infraestrutura gratuita (Render). Em períodos de inatividade, pode ocorrer *cold start*, fazendo com que a primeira requisição leve alguns segundos para responder.
+
+---
+
+## ⚡ Quick Test
+
+Teste a API diretamente pelo navegador ou via `curl`:
+
+```bash
+curl https://books-tech-challenge.onrender.com/api/v1/books/
+```
+
+Ou acesse o Swagger e execute as requisições pela interface gráfica.
+
+---
+
 ## 🏗️ Arquitetura
 
-A arquitetura foi pensada para ser simples, modular e extensível, permitindo fácil evolução para cenários de maior escala.
+A arquitetura foi pensada para ser simples, modular e extensível, permitindo fácil evolução para cenários de maior escala e integração com pipelines de dados e Machine Learning.
 
 ![Arquitetura do Projeto](diagramaPipeline.png)
 
@@ -48,7 +81,7 @@ A arquitetura foi pensada para ser simples, modular e extensível, permitindo f�
 
 ---
 
-## 🚀 Instalação e Execução
+## 🚀 Instalação e Execução (Local)
 
 ### Pré-requisitos
 
@@ -81,9 +114,22 @@ pip install -r requirements.txt
 
 ---
 
+## ▶️ Executando a API Localmente
+
+```bash
+poetry run python api/app.py
+```
+
+A API estará disponível em:
+
+* **API:** [http://127.0.0.1:5000/api/v1/](http://127.0.0.1:5000/api/v1/)
+* **Swagger UI:** [http://127.0.0.1:5000/api/v1/](http://127.0.0.1:5000/api/v1/)
+
+---
+
 ## 🗄️ Banco de Dados
 
-* O banco **SQLite** é criado automaticamente na primeira execução da API.
+* O banco **SQLite** é criado automaticamente na primeira execução da API
 * Arquivo gerado: `books.db`
 
 ### Popular o banco (scraping simulado)
@@ -94,19 +140,6 @@ Endpoint protegido por JWT:
 POST /api/v1/scraping/trigger
 Authorization: Bearer <ACCESS_TOKEN>
 ```
-
----
-
-## ▶️ Executando a API
-
-```bash
-poetry run python api/app.py
-```
-
-A API estará disponível em:
-
-* **API:** [http://127.0.0.1:5000/api/v1/](http://127.0.0.1:5000/api/v1/)
-* **Swagger UI:** [http://127.0.0.1:5000/api/v1/](http://127.0.0.1:5000/api/v1/)
 
 ---
 
@@ -123,15 +156,6 @@ Content-Type: application/json
 {
   "username": "admin",
   "password": "admin123"
-}
-```
-
-Resposta:
-
-```json
-{
-  "access_token": "<JWT_ACCESS_TOKEN>",
-  "refresh_token": "<JWT_REFRESH_TOKEN>"
 }
 ```
 
@@ -183,8 +207,6 @@ Authorization: Bearer <REFRESH_TOKEN>
 
 ## 🧪 Testes
 
-Execute todos os testes com:
-
 ```bash
 pytest
 ```
@@ -209,7 +231,7 @@ Este projeto foi desenvolvido com foco em **engenharia de Machine Learning**, in
 
 Embora utilize **SQLite** por simplicidade, a estrutura suporta migração para bancos mais robustos e integração com pipelines reais de ingestão e modelos em produção.
 
-A documentação via Swagger, aliada ao uso de JWT e à organização dos endpoints, torna o projeto adequado para apresentação em contextos profissionais e desafios técnicos.
+A disponibilidade de um **ambiente público**, aliada à documentação via **Swagger**, autenticação **JWT** e organização arquitetural, torna este projeto adequado para apresentação profissional, desafios técnicos e portfólio.
 
 ---
 
