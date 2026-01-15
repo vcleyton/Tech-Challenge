@@ -7,6 +7,8 @@
 
 > 🔗 **API pública:** [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-challenge.onrender.com/api/v1/)
 
+> 📊 **Dashboard público:** [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-dashboard.onrender.com)
+
 API RESTful para ingestão, persistência e exposição de dados de livros, com foco em **engenharia de dados** e **Machine Learning**. O projeto demonstra boas práticas de arquitetura, documentação e segurança, estando preparado para evolução em ambientes de produção.
 
 ---
@@ -29,7 +31,7 @@ O **Books Tech Challenge** é uma API desenvolvida em **Python** com **Flask** e
 
 ## 🌐 Ambiente Público (API Online)
 
-O projeto conta com uma **instância pública em execução**, permitindo testes, demonstração técnica e consumo externo sem necessidade de setup local.
+O projeto está disponível publicamente, permitindo **demonstração técnica, testes e avaliação de arquitetura**, sem necessidade de execução local.
 
 * **Base URL da API:**
   [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-challenge.onrender.com/api/v1/)
@@ -37,7 +39,11 @@ O projeto conta com uma **instância pública em execução**, permitindo testes
 * **Swagger UI (Documentação Interativa):**
   [https://books-tech-challenge.onrender.com/api/v1/](https://books-tech-challenge.onrender.com/api/v1/)
 
-> ℹ️ Este ambiente utiliza infraestrutura gratuita (Render). Em períodos de inatividade, pode ocorrer *cold start*, fazendo com que a primeira requisição leve alguns segundos para responder.
+* **URL pública do Dashboard:**
+  [https://books-tech-dashboard.onrender.com/](https://books-tech-dashboard.onrender.com)
+
+> ℹ️ Tanto a API quanto o dashboard utilizam infraestrutura gratuita (Render).
+Em períodos de inatividade, pode ocorrer cold start, fazendo com que a primeira requisição leve alguns segundos.
 
 ---
 
@@ -50,6 +56,12 @@ curl https://books-tech-challenge.onrender.com/api/v1/books/
 ```
 
 Ou acesse o Swagger e execute as requisições pela interface gráfica.
+
+Teste o Dashboard pelo navegador
+
+```arduino
+https://books-tech-dashboard.onrender.com/
+```
 
 ---
 
@@ -124,6 +136,20 @@ A API estará disponível em:
 
 * **API:** [http://127.0.0.1:5000/api/v1/](http://127.0.0.1:5000/api/v1/)
 * **Swagger UI:** [http://127.0.0.1:5000/api/v1/](http://127.0.0.1:5000/api/v1/)
+
+---
+
+## ▶️ Executando o Dashboard Localmente
+
+```bash
+streamlit run dashboard/app.py
+```
+
+O Dashboard estará disponível em:
+
+```arduino
+http://localhost:8501
+```
 
 ---
 
@@ -231,7 +257,7 @@ Este projeto foi desenvolvido com foco em **engenharia de Machine Learning**, in
 
 Embora utilize **SQLite** por simplicidade, a estrutura suporta migração para bancos mais robustos e integração com pipelines reais de ingestão e modelos em produção.
 
-A disponibilidade de um **ambiente público**, aliada à documentação via **Swagger**, autenticação **JWT** e organização arquitetural, torna este projeto adequado para apresentação profissional, desafios técnicos e portfólio.
+A disponibilidade de um **ambiente público**, aliada à documentação via **Swagger**, autenticação **JWT**, organização arquitetural, além de um Dashboard público, torna este projeto completo e com excelente maturidade técnica.
 
 ---
 
