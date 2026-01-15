@@ -24,7 +24,7 @@ O **Books Tech Challenge** é uma API desenvolvida em **Python** com **Flask** e
 
 A arquitetura foi pensada para ser simples, modular e extensível, permitindo fácil evolução para cenários de maior escala.
 
-![Arquitetura do Projeto](diagrama.png)
+
 
 **Fluxo principal:**
 
