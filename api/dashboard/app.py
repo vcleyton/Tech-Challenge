@@ -7,7 +7,7 @@ API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:5000")
 st.title("📊 Books Tech Challenge - Dashboard")
 
 try:
-    response = requests.get(f"{API_BASE_URL}/api/v1/books/stats/overview", timeout=10)
+    response = requests.get(f"{API_BASE_URL}/api/v1/books/stats", timeout=10)
     response.raise_for_status()
     data = response.json()
 
