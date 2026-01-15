@@ -12,8 +12,8 @@ try:
     data = response.json()
 
     st.metric("Total de Livros", data["total_books"])
-    st.metric("Preço Médio", data["average_price"])
-    st.metric("Rating Médio", data["average_rating"])
+    st.metric("Preço Médio", data["avg_price"])
+    st.metric("Rating Médio", data["avg_rating"])
 
 except Exception as e:
     st.error("Erro ao conectar com a API")
