@@ -60,7 +60,7 @@ def stats_categories():
 @router.get("/books/top-rated")
 def top_rated(limit: int = Query(default=20, ge=1, le=200)):
     """
-    GET /api/v1//books/top-rated
+    GET /api/v1/books/top-rated
     """
     store = default_data_store()
     df = store.load_books_df().copy()
