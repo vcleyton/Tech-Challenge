@@ -5,7 +5,6 @@ Script de ingestão de dados:
 - Cria a tabela books
 - Insere os dados no banco
 
-Este banco será usado posteriormente pela API Flask.
 """
 
 from pathlib import Path
