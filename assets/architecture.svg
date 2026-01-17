@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680" viewBox="0 0 1100 680">
+  <style>
+    .title { font: 700 20px 'Segoe UI', Arial, sans-serif; fill:#222 }
+    .label { font: 600 14px 'Segoe UI', Arial, sans-serif; fill:#fff }
+    .small { font: 400 12px 'Segoe UI', Arial, sans-serif; fill:#fff }
+    .arrow { stroke:#333; stroke-width:2; fill:none; marker-end: url(#arrowhead) }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Header -->
+  <text x="30" y="30" class="title">Arquitetura do Sistema - Tech Challenge</text>
+
+  <!-- Client -->
+  <rect x="40" y="60" rx="8" ry="8" width="200" height="70" fill="#0b5fff" />
+  <text x="140" y="100" text-anchor="middle" class="label">Cliente</text>
+  <text x="140" y="118" text-anchor="middle" class="small">Browser / Mobile App</text>
+
+  <!-- API / Flask -->
+  <rect x="300" y="40" rx="10" ry="10" width="480" height="120" fill="#0a4a8a" />
+  <text x="540" y="72" text-anchor="middle" class="label">API</text>
+  <text x="540" y="92" text-anchor="middle" class="small">Flask - `create_app()` (app.py)</text>
+  <text x="540" y="112" text-anchor="middle" class="small">Extensões: SQLAlchemy, JWT</text>
+
+  <!-- Swagger box -->
+  <rect x="800" y="40" rx="8" ry="8" width="260" height="70" fill="#2e7d32" />
+  <text x="930" y="72" text-anchor="middle" class="label">Documentação</text>
+  <text x="930" y="92" text-anchor="middle" class="small">Swagger / Flasgger</text>
+
+  <!-- Arrow Client -> API -->
+  <path d="M240,95 L300,95" class="arrow" />
+
+  <!-- Routes Layer -->
+  <rect x="250" y="180" rx="6" ry="6" width="620" height="70" fill="#00897B" />
+  <text x="560" y="210" text-anchor="middle" class="label">Camada de Rotas (Blueprints)</text>
+  <text x="560" y="230" text-anchor="middle" class="small">/health • /auth • /books • /stats • /ml</text>
+
+  <!-- Services Layer -->
+  <rect x="250" y="270" rx="6" ry="6" width="620" height="90" fill="#ff9800" />
+  <text x="560" y="300" text-anchor="middle" class="label">Camada de Serviços</text>
+  <text x="560" y="320" text-anchor="middle" class="small">auth_service • books_service • ml_service</text>
+
+  <!-- Repositories Layer -->
+  <rect x="250" y="380" rx="6" ry="6" width="620" height="70" fill="#6a1b9a" />
+  <text x="560" y="410" text-anchor="middle" class="label">Camada de Repositórios</text>
+  <text x="560" y="430" text-anchor="middle" class="small">books_repository • user_repository</text>
+
+  <!-- Data Layer / DB -->
+  <rect x="250" y="470" rx="8" ry="8" width="320" height="90" fill="#424242" />
+  <text x="410" y="500" text-anchor="middle" class="label">Armazenamento</text>
+  <text x="410" y="520" text-anchor="middle" class="small">SQLite (instance/books.db)</text>
+  <text x="410" y="540" text-anchor="middle" class="small">Modelos: Book, User</text>
+
+  <!-- Scraper -->
+  <rect x="40" y="300" rx="8" ry="8" width="180" height="90" fill="#7b1fa2" />
+  <text x="130" y="340" text-anchor="middle" class="label">Scraper</text>
+  <text x="130" y="360" text-anchor="middle" class="small">Scrapy (src/scraper)</text>
+  <text x="130" y="378" text-anchor="middle" class="small">Ingestão → instance/books.db</text>
+
+  <!-- ML Model -->
+  <rect x="700" y="470" rx="8" ry="8" width="220" height="90" fill="#c62828" />
+  <text x="810" y="500" text-anchor="middle" class="label">Machine Learning</text>
+  <text x="810" y="520" text-anchor="middle" class="small">ml_service • modelo (pickle)</text>
+
+  <!-- Arrows between layers -->
+  <path d="M540,160 L540,180" class="arrow" />
+  <path d="M540,250 L540,270" class="arrow" />
+  <path d="M540,360 L540,380" class="arrow" />
+  <path d="M410,450 L410,470" class="arrow" />
+
+  <!-- Arrow Scraper -> DB -->
+  <path d="M220,345 L250,345 L250,515" class="arrow" />
+
+  <!-- Arrow ML -> ML model / DB -->
+  <path d="M700,515 L700,520 L700,515" stroke="#333" stroke-width="0" fill="none" />
+  <path d="M700,515 L700,470" class="arrow" />
+  <path d="M720,515 L570,515 L570,560" class="arrow" />
+
+  <!-- Footer legend (compact) -->
+  <rect x="40" y="580" rx="6" ry="6" width="1020" height="80" fill="#f5f5f5" stroke="#ddd" />
+  <text x="60" y="606" class="small" fill="#111">Legenda:</text>
+  <text x="140" y="606" class="small" fill="#0b5fff">■ Cliente</text>
+  <text x="260" y="606" class="small" fill="#0a4a8a">■ API</text>
+  <text x="380" y="606" class="small" fill="#00897B">■ Rotas</text>
+  <text x="520" y="606" class="small" fill="#ff9800">■ Serviços</text>
+  <text x="680" y="606" class="small" fill="#6a1b9a">■ Repositórios</text>
+  <text x="860" y="606" class="small" fill="#424242">■ Banco de Dados</text>
+
+</svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="900" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-size: 24px; font-weight: bold; fill: #1a1a1a; font-family: Arial, sans-serif; }
+      .subtitle { font-size: 14px; fill: #555; font-family: Arial, sans-serif; }
+      .label { font-size: 12px; fill: #fff; font-weight: bold; font-family: Arial, sans-serif; }
+      .small-label { font-size: 11px; fill: #333; font-family: Arial, sans-serif; }
+      .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .box { stroke-width: 2; rx: 5; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="900" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" class="title">🏗️ Tech Challenge - Arquitetura da API</text>
+  
+  <!-- Layer 1: Clients -->
+  <g>
+    <rect x="50" y="70" width="1100" height="80" class="box" fill="#4A90E2" stroke="#2E5C8A"/>
+    <text x="600" y="95" text-anchor="middle" class="label">🌐 CAMADA DE CLIENTES</text>
+    
+    <rect x="80" y="105" width="200" height="35" class="box" fill="#357ABD" stroke="#2E5C8A"/>
+    <text x="180" y="128" text-anchor="middle" class="label">Web Client</text>
+    
+    <rect x="320" y="105" width="200" height="35" class="box" fill="#357ABD" stroke="#2E5C8A"/>
+    <text x="420" y="128" text-anchor="middle" class="label">Mobile App</text>
+    
+    <rect x="560" y="105" width="200" height="35" class="box" fill="#357ABD" stroke="#2E5C8A"/>
+    <text x="660" y="128" text-anchor="middle" class="label">Aplicações Externas</text>
+    
+    <rect x="800" y="105" width="250" height="35" class="box" fill="#357ABD" stroke="#2E5C8A"/>
+    <text x="925" y="128" text-anchor="middle" class="label">Outras Integrações</text>
+  </g>
+  
+  <!-- Arrow 1 to 2 -->
+  <line x1="600" y1="150" x2="600" y2="170" class="arrow"/>
+  
+  <!-- Layer 2: API Routes -->
+  <g>
+    <rect x="50" y="170" width="1100" height="110" class="box" fill="#50C878" stroke="#2D7A4A"/>
+    <text x="600" y="195" text-anchor="middle" class="label">🔌 CAMADA DE ROTAS (Flask)</text>
+    
+    <rect x="70" y="210" width="150" height="60" class="box" fill="#3A9B5C" stroke="#2D7A4A"/>
+    <text x="145" y="232" text-anchor="middle" class="small-label" style="fill: #fff;">📚 Books Routes</text>
+    <text x="145" y="248" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">GET /books</text>
+    <text x="145" y="259" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">POST /search</text>
+    
+    <rect x="250" y="210" width="150" height="60" class="box" fill="#3A9B5C" stroke="#2D7A4A"/>
+    <text x="325" y="232" text-anchor="middle" class="small-label" style="fill: #fff;">🔐 Auth Routes</text>
+    <text x="325" y="248" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">POST /register</text>
+    <text x="325" y="259" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">POST /login</text>
+    
+    <rect x="430" y="210" width="150" height="60" class="box" fill="#3A9B5C" stroke="#2D7A4A"/>
+    <text x="505" y="232" text-anchor="middle" class="small-label" style="fill: #fff;">🤖 ML Routes</text>
+    <text x="505" y="248" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">POST /train</text>
+    <text x="505" y="259" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">POST /predict</text>
+    
+    <rect x="610" y="210" width="150" height="60" class="box" fill="#3A9B5C" stroke="#2D7A4A"/>
+    <text x="685" y="232" text-anchor="middle" class="small-label" style="fill: #fff;">📊 Stats Routes</text>
+    <text x="685" y="248" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">GET /stats</text>
+    <text x="685" y="259" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">GET /analytics</text>
+    
+    <rect x="790" y="210" width="150" height="60" class="box" fill="#3A9B5C" stroke="#2D7A4A"/>
+    <text x="865" y="232" text-anchor="middle" class="small-label" style="fill: #fff;">❤️ Health Routes</text>
+    <text x="865" y="248" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">GET /health</text>
+    <text x="865" y="259" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Status Check</text>
+    
+    <rect x="970" y="210" width="150" height="60" class="box" fill="#3A9B5C" stroke="#2D7A4A"/>
+    <text x="1045" y="232" text-anchor="middle" class="small-label" style="fill: #fff;">🕷️ Scraper</text>
+    <text x="1045" y="248" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Web Scraping</text>
+    <text x="1045" y="259" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Data Collection</text>
+  </g>
+  
+  <!-- Arrow 2 to 3 -->
+  <line x1="600" y1="280" x2="600" y2="300" class="arrow"/>
+  
+  <!-- Layer 3: Services -->
+  <g>
+    <rect x="50" y="300" width="1100" height="100" class="box" fill="#FFB84D" stroke="#B38633"/>
+    <text x="600" y="325" text-anchor="middle" class="label">⚙️ CAMADA DE SERVIÇOS (Business Logic)</text>
+    
+    <rect x="100" y="345" width="220" height="45" class="box" fill="#FFA500" stroke="#B38633"/>
+    <text x="210" y="360" text-anchor="middle" class="small-label" style="fill: #fff;">BooksService</text>
+    <text x="210" y="374" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Search • Filter • Validate</text>
+    
+    <rect x="380" y="345" width="220" height="45" class="box" fill="#FFA500" stroke="#B38633"/>
+    <text x="490" y="360" text-anchor="middle" class="small-label" style="fill: #fff;">AuthService</text>
+    <text x="490" y="374" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Register • Login • JWT</text>
+    
+    <rect x="660" y="345" width="220" height="45" class="box" fill="#FFA500" stroke="#B38633"/>
+    <text x="770" y="360" text-anchor="middle" class="small-label" style="fill: #fff;">MLService</text>
+    <text x="770" y="374" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Train • Predict • Model</text>
+    
+    <rect x="940" y="345" width="160" height="45" class="box" fill="#FFA500" stroke="#B38633"/>
+    <text x="1020" y="360" text-anchor="middle" class="small-label" style="fill: #fff;">StatsService</text>
+    <text x="1020" y="374" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Analytics • Insights</text>
+  </g>
+  
+  <!-- Arrow 3 to 4 -->
+  <line x1="600" y1="400" x2="600" y2="420" class="arrow"/>
+  
+  <!-- Layer 4: Repository -->
+  <g>
+    <rect x="50" y="420" width="1100" height="90" class="box" fill="#9B59B6" stroke="#6C3A7C"/>
+    <text x="600" y="445" text-anchor="middle" class="label">💾 CAMADA DE REPOSITÓRIO (Data Access)</text>
+    
+    <rect x="150" y="460" width="280" height="40" class="box" fill="#7D3C7D" stroke="#6C3A7C"/>
+    <text x="290" y="478" text-anchor="middle" class="small-label" style="fill: #fff;">BooksRepository</text>
+    <text x="290" y="492" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">CRUD • Queries • Filtering</text>
+    
+    <rect x="520" y="460" width="280" height="40" class="box" fill="#7D3C7D" stroke="#6C3A7C"/>
+    <text x="660" y="478" text-anchor="middle" class="small-label" style="fill: #fff;">UserRepository</text>
+    <text x="660" y="492" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">CRUD • Authentication</text>
+    
+    <rect x="890" y="460" width="200" height="40" class="box" fill="#7D3C7D" stroke="#6C3A7C"/>
+    <text x="990" y="478" text-anchor="middle" class="small-label" style="fill: #fff;">Cache Layer</text>
+    <text x="990" y="492" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">Model Cache</text>
+  </g>
+  
+  <!-- Arrow 4 to 5 -->
+  <line x1="600" y1="510" x2="600" y2="530" class="arrow"/>
+  
+  <!-- Layer 5: Database -->
+  <g>
+    <rect x="50" y="530" width="1100" height="90" class="box" fill="#34495E" stroke="#1E2937"/>
+    <text x="600" y="555" text-anchor="middle" class="label">🗄️ CAMADA DE BANCO DE DADOS</text>
+    
+    <rect x="150" y="570" width="280" height="40" class="box" fill="#2C3E50" stroke="#1E2937"/>
+    <text x="290" y="588" text-anchor="middle" class="small-label" style="fill: #fff;">📊 Tabela USERS</text>
+    <text x="290" y="602" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">id, username, password, email</text>
+    
+    <rect x="520" y="570" width="280" height="40" class="box" fill="#2C3E50" stroke="#1E2937"/>
+    <text x="660" y="588" text-anchor="middle" class="small-label" style="fill: #fff;">📊 Tabela BOOKS</text>
+    <text x="660" y="602" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">title, price, rating, category</text>
+    
+    <rect x="890" y="570" width="200" height="40" class="box" fill="#2C3E50" stroke="#1E2937"/>
+    <text x="990" y="588" text-anchor="middle" class="small-label" style="fill: #fff;">SQLite</text>
+    <text x="990" y="602" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 10px;">user.db</text>
+  </g>
+  
+  <!-- Layer 6: Support Components -->
+  <g>
+    <text x="50" y="655" class="subtitle">🔧 COMPONENTES DE SUPORTE</text>
+    
+    <rect x="50" y="670" width="210" height="70" class="box" fill="#1ABC9C" stroke="#0E7856"/>
+    <text x="155" y="690" text-anchor="middle" class="small-label" style="fill: #fff;">🔐 JWT Auth</text>
+    <text x="155" y="704" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Token Generation</text>
+    <text x="155" y="716" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Authorization</text>
+    <text x="155" y="728" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Token Verify</text>
+    
+    <rect x="280" y="670" width="210" height="70" class="box" fill="#1ABC9C" stroke="#0E7856"/>
+    <text x="385" y="690" text-anchor="middle" class="small-label" style="fill: #fff;">🛡️ Validators</text>
+    <text x="385" y="704" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Input Validation</text>
+    <text x="385" y="716" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Type Checking</text>
+    <text x="385" y="728" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Business Rules</text>
+    
+    <rect x="510" y="670" width="210" height="70" class="box" fill="#1ABC9C" stroke="#0E7856"/>
+    <text x="615" y="690" text-anchor="middle" class="small-label" style="fill: #fff;">⚙️ Config</text>
+    <text x="615" y="704" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Database URI</text>
+    <text x="615" y="716" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Secret Keys</text>
+    <text x="615" y="728" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">JWT Settings</text>
+    
+    <rect x="740" y="670" width="210" height="70" class="box" fill="#1ABC9C" stroke="#0E7856"/>
+    <text x="845" y="690" text-anchor="middle" class="small-label" style="fill: #fff;">⚠️ Exception Handler</text>
+    <text x="845" y="704" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">ValidationError</text>
+    <text x="845" y="716" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">NotFoundError</text>
+    <text x="845" y="728" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">UnauthorizedError</text>
+    
+    <rect x="970" y="670" width="180" height="70" class="box" fill="#1ABC9C" stroke="#0E7856"/>
+    <text x="1060" y="690" text-anchor="middle" class="small-label" style="fill: #fff;">🤖 ML Model</text>
+    <text x="1060" y="704" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">RandomForest</text>
+    <text x="1060" y="716" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Price Prediction</text>
+    <text x="1060" y="728" text-anchor="middle" class="small-label" style="fill: #fff; font-size: 9px;">Training</text>
+  </g>
+  
+  <!-- Legend -->
+  <g>
+    <text x="50" y="800" class="subtitle" style="font-size: 13px; font-weight: bold;">Fluxo de Dados:</text>
+    <line x1="50" y1="810" x2="120" y2="810" class="arrow"/>
+    <text x="130" y="815" class="small-label">Requisição HTTP</text>
+    
+    <line x1="420" y1="810" x2="490" y2="810" stroke="#999" stroke-width="2" stroke-dasharray="5,5" fill="none"/>
+    <text x="500" y="815" class="small-label">Processamento Interno</text>
+    
+    <text x="50" y="850" class="small-label" style="font-size: 11px;">✅ Padrões: MVC Modified • Repository Pattern • Service Layer • JWT Auth • Exception Handling</text>
+  </g>
+</svg>

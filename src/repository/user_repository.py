@@ -1,5 +1,5 @@
 from src.extensions import db
-from src.models.user import User
+from src.models.users import User
 
 class UserRepository:
 

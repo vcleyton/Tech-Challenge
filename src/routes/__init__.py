@@ -4,6 +4,7 @@ Registra todas as blueprints e configura a documentação Swagger.
 """
 
 from flasgger import Swagger
+from flask_cors import CORS
 from .health import health_bp
 from .books import books_bp
 from .stats import stats_bp
@@ -15,6 +16,9 @@ def register_blueprints(app):
     Registra todas as Blueprints da aplicação.
     Também configura a documentação Swagger/OpenAPI.
     """
+
+    # Configuração de CORS
+    CORS(app, resources={r"/*": {"origins": "*"}})
 
     # Configuração do Swagger/Flasgger
     swagger = Swagger(app, template={
@@ -37,6 +41,19 @@ def register_blueprints(app):
                 "description": "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\""
             }
         }
+    }, config={
+        "headers": [],
+        "specs": [
+            {
+                "endpoint": 'apispec',
+                "route": '/apispec.json',
+                "rule_filter": lambda rule: True,
+                "model_filter": lambda tag: True,
+            }
+        ],
+        "static_url_path": "/flasgger_static",
+        "swagger_ui": True,
+        "specs_route": "/apidocs/"
     })
 
     # Registra blueprints
