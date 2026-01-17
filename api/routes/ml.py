@@ -2,7 +2,6 @@ from flask_restx import Namespace, Resource, fields
 from flask import request
 from api.database import get_db_connection
 
-# Namespace RESTX
 api = Namespace("ml", description="Endpoints para consumo de dados de ML")
 
 # Modelo opcional para predições recebidas (Swagger)
@@ -11,9 +10,7 @@ prediction_model = api.model("Prediction", {
     "predicted_rating": fields.Float(required=True, description="Predição de rating")
 })
 
-# ==========================
-# GET /api/v1/ml/features
-# ==========================
+
 @api.route("/features")
 class MLFeatures(Resource):
     @api.doc(description="Retorna os dados de features para treinamento ML")
@@ -30,9 +27,6 @@ class MLFeatures(Resource):
 
         return [dict(row) for row in books]
 
-# ==========================
-# GET /api/v1/ml/training-data
-# ==========================
 @api.route("/training-data")
 class MLTrainingData(Resource):
     @api.doc(description="Retorna todos os dados para treinamento de ML")
@@ -43,9 +37,7 @@ class MLTrainingData(Resource):
 
         return [dict(row) for row in books]
 
-# ==========================
-# POST /api/v1/ml/predictions
-# ==========================
+
 @api.route("/predictions")
 class MLPredictions(Resource):
     @api.doc(description="Recebe predições de ML")
