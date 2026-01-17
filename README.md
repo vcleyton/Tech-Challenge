@@ -44,7 +44,7 @@ Ideal para plataformas de e-commerce de livros, bibliotecas digitais e sistemas 
 
 ### Diagrama Visual da Arquitetura
 
-![Arquitetura do Sistema - Tech Challenge]()
+![Arquitetura do Sistema - Tech Challenge](assets/DiagramaArquitetural.jpeg)
 
 ### Pipeline do Projeto
 
