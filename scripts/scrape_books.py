@@ -29,10 +29,8 @@ DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
 
-# URL base do site
 BASE_URL = "https://books.toscrape.com/"
 
-# Headers simples para evitar bloqueios básicos
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; BookScraper/1.0)"
 }
