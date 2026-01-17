@@ -4,7 +4,6 @@ from api.database import get_db_connection
 
 api = Namespace("ml", description="Endpoints para consumo de dados de ML")
 
-# Modelo opcional para predições recebidas (Swagger)
 prediction_model = api.model("Prediction", {
     "id": fields.Integer(required=True, description="ID do livro"),
     "predicted_rating": fields.Float(required=True, description="Predição de rating")
