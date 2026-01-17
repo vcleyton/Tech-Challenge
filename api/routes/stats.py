@@ -1,12 +1,8 @@
 from flask_restx import Namespace, Resource, fields
 from api.database import get_db_connection
 
-# Namespace RESTX
 api = Namespace("stats", description="Estatísticas gerais e por categoria")
 
-# ==========================
-# GET /api/v1/stats/overview
-# ==========================
 @api.route("/overview")
 class StatsOverview(Resource):
     @api.doc(description="Estatísticas gerais da coleção")
@@ -45,9 +41,6 @@ class StatsOverview(Resource):
             ]
         }
 
-# ==========================
-# GET /api/v1/stats/categories
-# ==========================
 @api.route("/categories")
 class StatsByCategory(Resource):
     @api.doc(description="Estatísticas detalhadas por categoria")
