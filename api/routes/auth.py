@@ -7,10 +7,8 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 
-# Namespace RESTX
 api = Namespace("auth", description="Autenticação e JWT")
 
-# Modelo Swagger para login
 login_model = api.model(
     "Login",
     {
@@ -19,14 +17,10 @@ login_model = api.model(
     }
 )
 
-# Usuário fake (suficiente para o challenge)
 USERS = {
     "admin": "admin123"
 }
 
-# ==========================
-# POST /api/v1/auth/login
-# ==========================
 @api.route("/login")
 class Login(Resource):
     @api.expect(login_model, validate=True)
@@ -47,9 +41,7 @@ class Login(Resource):
             "refresh_token": refresh_token
         }
 
-# ==========================
-# POST /api/v1/auth/refresh
-# ==========================
+
 @api.route("/refresh")
 class Refresh(Resource):
     @jwt_required(refresh=True)
