@@ -821,7 +821,7 @@ print(response.json())
 | `DATABASE_URI` | Connection string do banco de dados | `sqlite:///user.db` |
 | `SECRET_KEY` | Chave para sessões Flask | - |
 | `JWT_SECRET_KEY` | Chave para assinar JWT | - |
-| `SWAGGER_SCHEMES` | Define o protocolo de transferência da api | `http ou https` |
+| `SWAGGER_SCHEMES` | Define o protocolo de transferência do swagger | `http ou https` |
 
 ## 🤝 Contribuindo
 
