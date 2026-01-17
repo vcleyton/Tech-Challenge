@@ -2,12 +2,8 @@ from flask_restx import Namespace, Resource
 from flask_jwt_extended import jwt_required
 from flask import jsonify
 
-# Namespace RESTX
 api = Namespace("scraping", description="Operações de scraping de livros (admin)")
 
-# ==========================
-# POST /api/v1/scraping/trigger
-# ==========================
 @api.route("/trigger")
 class TriggerScraping(Resource):
     @jwt_required()
