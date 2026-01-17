@@ -5,7 +5,6 @@ Registra todas as blueprints e configura a documentação Swagger.
 
 from flasgger import Swagger
 from flask_cors import CORS
-from src.config.config import Config
 from .health import health_bp
 from .books import books_bp
 from .stats import stats_bp
@@ -33,7 +32,7 @@ def register_blueprints(app):
             }
         },
         "basePath": "/",
-        "schemes": Config.SWAGGER_SCHEMES,
+        "schemes": ["http", "https"],
         "securityDefinitions": {
             "Bearer": {
                 "type": "apiKey",

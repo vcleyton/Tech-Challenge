@@ -104,9 +104,6 @@ DATABASE_URI=sqlite:///user.db
 # Chaves de Segurança
 SECRET_KEY=your-secret-key-here
 JWT_SECRET_KEY=your-jwt-secret-key-here
-
-# Configurações de esquema do swagger (http, https)
-SWAGGER_SCHEMES=http
 ```
 
 ### 5. Gerar Chaves de Segurança
@@ -821,7 +818,6 @@ print(response.json())
 | `DATABASE_URI` | Connection string do banco de dados | `sqlite:///user.db` |
 | `SECRET_KEY` | Chave para sessões Flask | - |
 | `JWT_SECRET_KEY` | Chave para assinar JWT | - |
-| `SWAGGER_SCHEMES` | Define o protocolo de transferência do swagger | `http ou https` |
 
 ## 🤝 Contribuindo
 
