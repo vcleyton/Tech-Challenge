@@ -12,8 +12,6 @@ class TriggerScraping(Resource):
         security="Bearer Auth"
     )
     def post(self):
-        # Aqui você pode chamar a função real de scraping
-        # Por enquanto é um mock
         return jsonify({
             "message": "Scraping iniciado com sucesso (mock)"
         })
