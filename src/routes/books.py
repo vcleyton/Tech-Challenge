@@ -11,7 +11,7 @@ books_bp = Blueprint('books', __name__)
 
 service = BooksService()
 
-@books_bp.route('/', methods=['GET'])
+@books_bp.route('', methods=['GET'])
 def get_all_books():
     """
     Retorna todos os livros disponíveis.

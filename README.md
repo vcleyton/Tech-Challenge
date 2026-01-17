@@ -104,6 +104,9 @@ DATABASE_URI=sqlite:///user.db
 # Chaves de Segurança
 SECRET_KEY=your-secret-key-here
 JWT_SECRET_KEY=your-jwt-secret-key-here
+
+# Configurações de esquema do swagger (http, https)
+SWAGGER_SCHEMES=http
 ```
 
 ### 5. Gerar Chaves de Segurança
@@ -265,6 +268,9 @@ Tech Challenge/
 │       ├── exceptions.py    # Exceções customizadas
 │       └── validators.py    # Validadores
 │
+├── assets/                       # Pasta de imagens
+│   ├── DiagramaArquitetural.jpeg # Imagem da arquitetura do projeto
+│
 └── instance/                # Arquivos de instância (não versionados)
     ├── user.db              # Banco de dados SQLite com dados do usuário
     ├── books.db             # Banco de dados SQLite com dados de livros
@@ -355,7 +361,7 @@ Content-Type: application/json
 
 #### Listar Todos os Livros
 ```http
-GET /books/
+GET /books
 ```
 
 **Response (200 OK):**
@@ -674,7 +680,7 @@ curl -X POST http://localhost:5000/auth/login \
   -d '{"username": "john_doe", "password": "senha123"}'
 
 # Listar todos os livros
-curl http://localhost:5000/books/
+curl http://localhost:5000/books
 
 # Obter detalhes de um livro
 curl http://localhost:5000/books/1
@@ -730,7 +736,7 @@ response = requests.post(
 print(response.json())
 
 # 5. Listar todos os livros
-response = requests.get(f"{BASE_URL}/books/")
+response = requests.get(f"{BASE_URL}/books")
 print(response.json())
 
 # 6. Obter estatísticas
@@ -815,6 +821,7 @@ print(response.json())
 | `DATABASE_URI` | Connection string do banco de dados | `sqlite:///user.db` |
 | `SECRET_KEY` | Chave para sessões Flask | - |
 | `JWT_SECRET_KEY` | Chave para assinar JWT | - |
+| `SWAGGER_SCHEMES` | Define o protocolo de transferência da api | `http ou https` |
 
 ## 🤝 Contribuindo
 

@@ -19,3 +19,6 @@ class Config:
     
     # Configuração do tempo de expiração do token JWT
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=1800)  # 30 minutos
+
+    # Configuração do Swagger
+    SWAGGER_SCHEMES = os.getenv('SWAGGER_SCHEMES', 'http').split(',')

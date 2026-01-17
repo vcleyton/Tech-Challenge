@@ -21,7 +21,7 @@ books_repository = BooksRepository()
 start_time = datetime.now(timezone.utc)
 
 
-@health_bp.route('/', methods=['GET'])
+@health_bp.route('', methods=['GET'])
 def health_check():
     """
     Verifica o status de saúde da aplicação.
