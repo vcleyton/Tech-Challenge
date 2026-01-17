@@ -269,7 +269,7 @@ Tech Challenge/
 │       └── validators.py    # Validadores
 │
 ├── assets/                       # Pasta de imagens
-│   ├── DiagramaArquitetural.jpeg # Imagem da arquitetura do projeto
+│   └── DiagramaArquitetural.jpeg # Imagem da arquitetura do projeto
 │
 └── instance/                # Arquivos de instância (não versionados)
     ├── user.db              # Banco de dados SQLite com dados do usuário
