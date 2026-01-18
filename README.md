@@ -37,8 +37,8 @@ Ideal para plataformas de e-commerce de livros, bibliotecas digitais e sistemas 
 ## 🔗 Links Importantes
 
 - **Deploy**: <https://tech-challenge-0upc.onrender.com>
-- **Vídeo Demonstração**: [Link do Vídeo] *(a ser preenchido)*
-- **Documentação Swagger**: Disponível em `/apidocs` quando a aplicação estiver rodando
+- **Vídeo Demonstração**: <https://drive.google.com/file/d/1kG7rX2xj72V46hYRfzBjgfP_FdDqDi_h/view?usp=sharing>
+- **Documentação Swagger**: <https://tech-challenge-0upc.onrender.com/apidocs>
 
 ## 🏗️ Arquitetura do Projeto
 
